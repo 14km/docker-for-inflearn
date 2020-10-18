@@ -1,4 +1,4 @@
 # 베이스 이미지
-FROM ubuntu:18.04-alpine
+FROM alpine:3.7
 
 CMD ["echo", "hello"]
