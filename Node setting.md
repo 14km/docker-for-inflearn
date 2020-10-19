@@ -50,3 +50,17 @@ app.listen(PORT, HOST);
 // 단순 로그를 남겨보자!
 console.log(`Running on http:://${HOST}:${PORT}`);
 ```
+
+## 도커 파일을 만들자!
+
+```jsx
+FROM node:10
+
+RUN npm install
+
+CMD["node", "server.js"]
+```
+
+- alpine 으로 하지 않는 이유는..?
+→ alpine의 이미지의 경우는 NPM이 설치가 되지않아 있기 때문에 
+→ 이 경우 npm 부터 다시 깔아줘야한다..
