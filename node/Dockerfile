@@ -3,6 +3,8 @@ FROM node:10
 
 COPY ./ ./
 
+WORKDIR /usr/ser/app
+
 # npm install 명령어를 통하여 NPM Registy -> Module download 가 실행된다.
 RUN npm install
 
