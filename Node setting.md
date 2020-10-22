@@ -197,3 +197,45 @@ docker run -p 49160:8080 <docker image>
 # 외부 포트, 내부포트를 지정해주면 정상적으로 이미지 접근이 완료 된다.
 docker run -p 8080:8080 connor/node:0.0.5
 ```
+
+## WORKDIR
+
+- Docker `WORKDIR /usr/src/app`
+- 이미지안에서 어플리케이션 소스 코드를 갖고 있을 디렉토리를 생성하는 것이다.
+- 이 디렉토리가 app에 `working` 디렉토리가 된다.
+
+```docker
+# workdir이 따로 존재하지 않는 경우
+# 
+
+...
+
+sh# ls -l
+total 96
+-rw-r--r--   1 root root   168 Oct 19 15:10 Dockerfile
+drwxr-xr-x   1 root root  4096 Oct 13 02:25 bin
+drwxr-xr-x   2 root root  4096 Jul 10 21:05 boot
+drwxr-xr-x   5 root root   340 Oct 19 15:22 dev
+drwxr-xr-x   1 root root  4096 Oct 19 15:22 etc
+drwxr-xr-x   1 root root  4096 Oct 13 08:43 home
+drwxr-xr-x   1 root root  4096 Oct 13 02:25 lib
+drwxr-xr-x   2 root root  4096 Oct 12 07:00 lib64
+drwxr-xr-x   2 root root  4096 Oct 12 07:00 media
+drwxr-xr-x   2 root root  4096 Oct 12 07:00 mnt
+drwxr-xr-x  52 root root  4096 Oct 19 15:11 node_modules
+drwxr-xr-x   1 root root  4096 Oct 13 08:49 opt
+-rw-r--r--   1 root root 14287 Oct 19 15:11 package-lock.json
+-rw-r--r--   1 root root   289 Oct 18 17:02 package.json
+dr-xr-xr-x 149 root root     0 Oct 19 15:22 proc
+drwx------   1 root root  4096 Oct 19 15:11 root
+drwxr-xr-x   3 root root  4096 Oct 12 07:00 run
+drwxr-xr-x   1 root root  4096 Oct 13 02:25 sbin
+-rw-r--r--   1 root root   496 Oct 18 17:07 server.js
+drwxr-xr-x   2 root root  4096 Oct 12 07:00 srv
+dr-xr-xr-x  12 root root     0 Oct 19 15:22 sys
+drwxrwxrwt   1 root root  4096 Oct 13 08:49 tmp
+drwxr-xr-x   1 root root  4096 Oct 12 07:00 usr
+drwxr-xr-x   1 root root  4096 Oct 12 07:00 var
+
+... 
+```
