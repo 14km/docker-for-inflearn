@@ -1,9 +1,10 @@
 # Base Image
 FROM node:10
 
-COPY ./ ./
+# WORKDIR 순서를 맞춰야 한다.
+WORKDIR /usr/src/app
 
-WORKDIR /usr/ser/app
+COPY ./ ./
 
 # npm install 명령어를 통하여 NPM Registy -> Module download 가 실행된다.
 RUN npm install

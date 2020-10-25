@@ -239,3 +239,28 @@ drwxr-xr-x   1 root root  4096 Oct 12 07:00 var
 
 ... 
 ```
+
+- COPY 파일은 파일 시스템에 들어오게 된다.
+- 하지만, workdir를 지정하지 않았을 경우는.. 위와 같이 노출된다.
+
+### WORKDIR 이 지정되지 않았다면?
+
+- 베이스 이미지에 home이라는 폴더에 COPY 하게 된다.
+- 즉, 새로 추가되는 폴더 중에 home이라는 폴더가 있다면 중복이 되므로 원래 있던 폴더가 덮어씌워져 버리는 문제가 생긴다.
+- 모든 파일이 한 디렉토리에 들어가 버리니 너무 정리가 안된다.
+
+→ 즉, 어플리케이션을 위한 소스 WORK 디렉토리를 따로 만들자!
+
+```docker
+# Base Image
+FROM node:10
+
+WORKDIR /usr/src/app
+
+COPY ./ ./
+
+# npm install 명령어를 통하여 NPM Registy -> Module download 가 실행된다.
+RUN npm install
+
+CMD ["node", "server.js"]
+```
