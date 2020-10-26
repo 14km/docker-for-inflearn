@@ -11,7 +11,7 @@ const app = express();
 
 // get method 설정!
 app.get('/', (req, res) => {
-  res.send('hello World');
+  res.send('반갑습니다...!!!');
 });
 
 // 해당 서버의 포트 및 호스트를 설정하는 것.

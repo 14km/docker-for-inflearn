@@ -270,3 +270,24 @@ CMD ["node", "server.js"]
 
 - 소스코드를 계속 변경시켜 변경 된 부분을 어플리케이션에 반영시키려면..
 - Docker 표시된 이 구간 전체를 (이미지 생성부터) 다시 실행시켜야 합니다.
+
+
+## Docker Volume에 대하여...
+
+- COPY 만으로는 현재, 단순히 복사만을 하는 것이다.
+- 수정된 내용을 사용하려면, Volume 설정을 해야 한다
+
+→ 볼륨의 경우는 Mapping(참조) 하는 형태로 지정되어야 파일 변경시 같이 변경된다.
+→ `-v /usr/src/app/node_modiles` → 매핑을 하지 않도록 설정하기 위함.
+→ -`v $(pwd):/usr/src/app`  pwd 경로에 있는 디렉토리 폭은 파일은 /usr/src/app 경로에서 참조한다.
+
+### CLI
+
+```docker
+docker run -p 5000:8080 -v /usr/src/app/node_modules -v $(pwd):/usr/src/app <images>
+
+# /usr/src/app
+# 경로가 설정된 이유는?? WORKING DIR에 설정이 /usr/src/app이기 때문에..
+```
+
+→ 도커 이미지를 바꾸지 않아도 자동으로 볼륨이 빌드될 수 있다.
