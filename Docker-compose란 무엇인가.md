@@ -12,3 +12,4 @@
 - 먼저 redis-server를 작동시켜야한다.
 - redis 모듈을 다운로드 받는데.
 - 레디스 모듈을 받은 후 레디스 클라이언트를 생성하기 위해서 Redis에서 제공하는 createClinet() 함수를 이용해 redis.createClient로 레디스 클레이언트를 생성한다.
+- 하지만, 여기서 redis server가 작동하는 곳과 Node.js 앱이 작동하는곳이 다르다면, 네트워크 연결이 필요하다. (port, host) 인자를 명시해줘야한다.
