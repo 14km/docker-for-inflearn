@@ -1,6 +1,11 @@
 const express = require('express');
 const redis = require('redis');
 
+// express PORT 설정값
+const PORT = 5000;
+// express 호스트 주소
+const HOST = '0.0.0.0';
+
 // 레디스 클라이언트 생성
 const redisClient = redis.createClient({
   host: 'redis-server',
@@ -20,5 +25,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(8080);
+// 해당 서버의 포트 및 호스트를 설정하는 것.
+app.listen(PORT, HOST);
+
 console.log('Server Run!!');
