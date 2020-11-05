@@ -113,3 +113,36 @@ services:
       - "5000:8000"
 ```
 
+- `docker-compose up -d` 다음과 같은 명령어로 back-ground에서 실행이 가능하다.
+- `docker-compose up` vs `docker-compose up --build`
+
+    → `docker-compose up` 이미지가 없을때 빌드 하고 컨테이너를 시작한다.
+
+    → `docker-compose up —build` 이미지가 있어도 새로 빌드하고 컨테이너를 시작한다.
+
+## Docker-compose 멈추기를 하자.
+
+- `docker-compose down` 를 사용하여 중지할 수 있다.
+
+```docker
+CONTAINER ID        IMAGE                 COMMAND                  CREATED             STATUS              PORTS                    NAMES
+1bdbe4e8acc7        redis                 "docker-entrypoint.s…"   44 seconds ago      Up 42 seconds       6379/tcp                 node-redis_redis-server_1
+add6073807a2        node-redis_node-app   "docker-entrypoint.s…"   44 seconds ago      Up 42 seconds       0.0.0.0:5000->8000/tcp   node-redis_node-app_1
+
+...
+
+docker-compose down
+Stopping node-redis_redis-server_1 ... done
+Stopping node-redis_node-app_1     ... done
+Removing node-redis_redis-server_1 ... done
+Removing node-redis_node-app_1     ... done
+Removing network node-redis_default
+
+...
+
+docker ps
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+```
+
+- docker-compose 파일을 중지할 수 있다.
