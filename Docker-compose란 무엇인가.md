@@ -34,3 +34,81 @@ const redisClient = redis.createClient({
   port: 6379,
 });
 ```
+## 도커 파일을 제작하자!
+
+```docker
+FROM node:10
+
+WORKDIR /usr/src/app
+
+COPY ./ ./
+
+RUN npm install
+
+CMD ["node", "server.js"]
+```
+
+→ compose를 사용할 때, 필요한 정보이다.
+
+---
+
+## 빌드 후 사용해보자..
+
+```docker
+# docker file in dir
+docker build -t connor/node:1.0.0 ./
+
+...
+
+# 에러가 발생된다..
+docker run connor/node:1.0.0                   
+internal/modules/cjs/loader.js:638
+    throw err;
+    ^
+
+Error: Cannot find module '/usr/src/app/server.js'
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:562:25)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+```
+
+→ 왜 에러가 발생되지??
+
+→ 이유는, 도커 컨테이너 끼리 설정없이는 분리된 공간을 접근할 수 없기 때문이다.
+
+→ 멀티 컨테이너의 경우는 네트워크를 설정 해줘야 한다.
+
+→ 이때 `docker compose`를 사용하면 된다..!
+
+---
+
+## Docker compose file을 작성해보자.
+
+- `docker-compose.yml` 파일을 생성하면 된다.
+
+```docker
+그전에..yml 파일이 먼데요??
+
+yml 파일이란..
+
+YAML ain't markup language의 약자이다.
+일반적으로 구성 파일 및 데이터가 저장되거나 전송되는 응용 프로그램에서 사용되고
+원래 XML 이나 json 포맷으로 많이 쓰였지만, 좀 더 사람이 읽기 쉽게 만들어 졌다.
+```
+
+### APP을 위한 docker-compose 파일의 구조이다.
+
+```docker
+version: "3"
+
+services:
+  redis-server:
+    image: "redis"
+  node-app:
+    image: .
+    ports:
+    - "5000:8000"
+```
+
