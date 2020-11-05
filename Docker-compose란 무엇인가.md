@@ -102,13 +102,14 @@ YAML ain't markup language의 약자이다.
 
 ```docker
 version: "3"
-
 services:
   redis-server:
     image: "redis"
   node-app:
-    image: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-    - "5000:8000"
+      - "5000:8000"
 ```
 
