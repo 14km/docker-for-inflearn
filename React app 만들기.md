@@ -33,3 +33,53 @@ CMD ["npm", "run", "start"]
 ```
 
 - 불필요한 종속성때문에, 다음과 같이 설정해야한다.
+
+### 도커 파일을 빌드하자!
+
+```docker
+# Dockerfile.dev
+
+docker build -t connor/node:1.0.0 Dockerfile.dev
+
+...
+
+unable to prepare context: context must be a directory
+Dockerfile  
+```
+
+→ 빌드를 해보니.. 오류가 발생된다.
+
+→ 원래 이미지를 빌드할 때 해당 디렉토리만 Dockerfile을 스스로 찾아 빌드를 해주는데..
+
+→ Dockerfile을 정확히 찾지 못하여 에러가 발생된 건이다.
+
+→ `docker build -t connor/node:1.0.0 -f Dockerfile.dev ./`
+
+### docker build -f 를 통해서 한다.
+
+```docker
+# Dockerfile.dev를 빌드한다.
+docker build -t connor/node:1.0.0 -f Dockerfile.dev ./
+```
+
+→ 다음과 같이 빌드가 가능해진다.
+
+### node_modules 를 지워도 괜찮다.
+
+```docker
+#Dockerfile 내에 파일 내용중..
+
+...
+
+COPY package.json ./
+
+RUN npm install
+
+COPY ./ ./
+
+...
+```
+
+→ npm install 에서 node_modules가 설치된다.
+
+→ 기존 react app을 설치할때 자동으로.. 반영되어 있으므로 즉, 로컬은 지워도된다.
