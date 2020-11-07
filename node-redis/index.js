@@ -2,7 +2,7 @@ const express = require('express');
 const redis = require('redis');
 
 // express PORT 설정값
-const PORT = 5000;
+const PORT = 8000;
 // express 호스트 주소
 const HOST = '0.0.0.0';
 
