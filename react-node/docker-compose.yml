@@ -1,0 +1,22 @@
+# 버전
+version: "3"
+
+# 서비스 명칭 (컨테이너 정의)
+services:
+  # 서비스 명칭 (react, node...)
+  react:
+    # 현재 디렉토리의 Docker file 사용..
+    build:
+      # 도커이미지를 구성하기 위한 파일 또는 폴더의 위치
+      context: .
+      # 어떠한 설정 파일을 인지..
+      dockerfile: Dockerfile.dev
+    # 도커의 포트 매핑 (로컬:컨테이너)
+    ports:
+      - "3000:3000"
+    # 로컬머신에 있는 디렉토리 공유.
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    # 리액트앱을 종료시키기 위함.
+    stdin_open: true
