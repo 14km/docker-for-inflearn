@@ -20,3 +20,12 @@ services:
       - ./:/usr/src/app
     # 리액트앱을 종료시키기 위함.
     stdin_open: true
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    # 컨테이너가 실행될때 실행되는 커맨드
+    command: [ "npm", "run", "test" ]
