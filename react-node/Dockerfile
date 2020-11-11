@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:alpine as builder
 
 WORKDIR /usr/src/app
 
@@ -8,4 +8,9 @@ RUN npm install
 
 COPY ./ ./
 
-CMD ["npm", "run", "start"]
+# build 를 통하여 nginx를 이용하여 정적 파일을 보여준다.
+CMD ["npm", "run", "build"]
+
+FROM nginx
+
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
