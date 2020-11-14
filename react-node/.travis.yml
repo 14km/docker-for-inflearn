@@ -1,0 +1,22 @@
+# 관리자 권한을 실행하기 위함.
+sudo: required
+
+# 어떠한 언어 플랫폼을 사용할 것인지.
+language: generic
+
+# 도커 환경을 구성한다.
+services:
+  - docker
+
+# 스크립트를 실행하는 환경을 셋팅
+before_install:
+  - echo "start Creating an image with docekrfile"
+  - docker build -t <image name/tag> -f Dockerfile.dev .
+
+# 실제 스크립트 실행구문
+script:
+  - docker run -e CI=true <image name/tag> npm run test -- --coverage
+
+# 정상적으로 성공 후 실행할일.
+after_success:
+  - echo "Test Success"
