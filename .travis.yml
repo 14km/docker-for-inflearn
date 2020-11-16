@@ -37,6 +37,5 @@ delopy:
   on:
     # 어떠한 github에 branch를 사용할 예정인지 지정한다.
     branch: master
-
-access_key_id: $AWS_ACCESS_KEY
-secret_access_key: $AWS_SECRET_KEY
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
