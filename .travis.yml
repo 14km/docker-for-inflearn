@@ -33,7 +33,7 @@ delopy:
   # elasticbeanstalk에 버켓 이름 (S3에서 확인이 가능하다.
   bucket_name: "elasticbeanstalk-ap-northeast-2-077842446775"
   # elasticbeanstalk의 버킷 경로
-  bucket_path: "docker-react-app"
+  bucket_path: "react-for-eb"
   on:
     # 어떠한 github에 branch를 사용할 예정인지 지정한다.
     branch: master
